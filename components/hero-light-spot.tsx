@@ -16,7 +16,7 @@ export default function HeroLightSpot() {
     const heroSection = section.closest("section#hero") as HTMLElement | null;
     const target = heroSection ?? section;
 
-    gsap.set(spot, { "--x": "50%", "--y": "50%" });
+    gsap.set(spot, { "--x": 50, "--y": 50 });
 
     const xTo = gsap.quickTo(spot, "--x", { duration: 0.7, ease: "power2.out" });
     const yTo = gsap.quickTo(spot, "--y", { duration: 0.7, ease: "power2.out" });
@@ -25,13 +25,13 @@ export default function HeroLightSpot() {
       const rect = target.getBoundingClientRect();
       const xPct = ((e.clientX - rect.left) / rect.width) * 100;
       const yPct = ((e.clientY - rect.top) / rect.height) * 100;
-      xTo(`${xPct}%`);
-      yTo(`${yPct}%`);
+      xTo(xPct);
+      yTo(yPct);
     };
 
     const handleMouseLeave = () => {
-      xTo("50%");
-      yTo("50%");
+      xTo(50);
+      yTo(50);
     };
 
     target.addEventListener("mousemove", handleMouseMove);
@@ -50,7 +50,7 @@ export default function HeroLightSpot() {
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.42) 0%, rgba(255,255,255,0.08) 32%, transparent 58%)",
+            "radial-gradient(circle at calc(var(--x, 50) * 1%) calc(var(--y, 50) * 1%), rgba(255,255,255,0.42) 0%, rgba(255,255,255,0.08) 32%, transparent 58%)",
           mixBlendMode: "overlay",
         }}
       />
